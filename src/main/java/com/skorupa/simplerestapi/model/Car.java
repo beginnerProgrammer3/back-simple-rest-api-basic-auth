@@ -28,18 +28,20 @@ public class Car {
     private Double capacityEngine;
     private Long kilometers;
     private Double price;
+    private String image;
 
     public Car() {
     }
 
     public Car(String mark, String name, String engine,
-               Double capacityEngine, Long kilometers, Double price) {
+               Double capacityEngine, Long kilometers, Double price, String image) {
         this.mark= mark;
         this.name = name;
         this.engine = engine;
         this.capacityEngine = capacityEngine;
         this.kilometers = kilometers;
         this.price = price;
+        this.image = image;
     }
 }
 
