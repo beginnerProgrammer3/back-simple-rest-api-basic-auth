@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.List;
 
-@EnableSwagger2
+
 @SpringBootApplication
 public class SimplerestapiApplication {
 
