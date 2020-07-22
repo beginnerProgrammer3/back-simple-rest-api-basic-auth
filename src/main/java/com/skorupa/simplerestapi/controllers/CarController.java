@@ -1,11 +1,9 @@
 package com.skorupa.simplerestapi.controllers;
 
+import com.skorupa.simplerestapi.model.ApkUser;
 import com.skorupa.simplerestapi.model.Car;
-import com.skorupa.simplerestapi.model.User;
 import com.skorupa.simplerestapi.repository.CarRepository;
-import io.swagger.annotations.BasicAuthDefinition;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -31,8 +29,8 @@ public class CarController {
 
     @GetMapping(produces = "application/json")
     @RequestMapping( {"/validateLogin"} )
-    public User validateLogin() {
-        return new User("User successfully authenticated");
+    public ApkUser validateLogin() {
+        return new ApkUser("ApkUser successfully authenticated");
     }
 
 

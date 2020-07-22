@@ -10,13 +10,13 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @Entity
 public class Car {
-
 
     @Id
     @GeneratedValue
@@ -29,6 +29,7 @@ public class Car {
     private Long kilometers;
     private Double price;
     private String image;
+
 
     public Car() {
     }
