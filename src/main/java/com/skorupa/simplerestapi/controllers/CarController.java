@@ -54,6 +54,24 @@ public class CarController {
         return carRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Not found car with id: " + id));
     }
 
+    @PutMapping(path = "/{id}")
+    public Car updateCarById(@PathVariable("id") Long id, @RequestBody Car car){
+        Optional<Car> carInDb = Optional.of(carRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Not found car with id:" + id)));
+        if(carInDb.isPresent()){
+        Car carToUpdate =carInDb.get() ;
+        carToUpdate.setId(id);
+        carToUpdate.setCapacityEngine(car.getCapacityEngine());
+        carToUpdate.setEngine(car.getEngine());
+        carToUpdate.setImage(car.getImage());
+        carToUpdate.setKilometers(car.getKilometers());
+        carToUpdate.setMark(car.getMark());
+        carToUpdate.setName(car.getName());
+        carToUpdate.setPrice(car.getPrice());
+        carRepository.save(carToUpdate);
+        return carToUpdate;}
+        return null;
+    }
+
 
 
 }

@@ -43,12 +43,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .headers().frameOptions().disable()
                 .and()
-                .csrf().ignoringAntMatchers("/h2-console/**")
-                .and()
-                .cors().disable();
+                .csrf().ignoringAntMatchers("/h2-console/**");
 
-        http.authorizeRequests().anyRequest().authenticated().and().httpBasic().and().csrf().disable();
-
+//        http.csrf().disable().authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").authenticated().and().httpBasic().and().cors().disable();
+        http.csrf().disable().
+                authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()
+                .and().httpBasic();
 //        http.authorizeRequests().antMatchers("/swagger-ui").permitAll();
 //        http.csrf().disable()
 //                .authorizeRequests().anyRequest().authenticated().and().authenticationProvider(authenticationProvider());
