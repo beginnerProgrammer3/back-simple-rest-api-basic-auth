@@ -27,6 +27,8 @@ public class DataLoader implements CommandLineRunner {
 
         ApkUser apkUser = new ApkUser("aaa","user","www@wp",passwordEncoder().encode("1234"),"USER",true);
         userRepository.save(apkUser);
+        ApkUser apkUser1 = new ApkUser("aaa","admin","www@wp",passwordEncoder().encode("1234"),"USER",true);
+        userRepository.save(apkUser1);
 
         carRepository.save(car1);
         carRepository.save(car2);

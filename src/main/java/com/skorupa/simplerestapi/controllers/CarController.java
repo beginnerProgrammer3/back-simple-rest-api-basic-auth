@@ -27,6 +27,7 @@ public class CarController {
         return (List<Car>) carRepository.findAll();
     }
 
+
     @GetMapping(produces = "application/json")
     @RequestMapping( {"/validateLogin"} )
     public ApkUser validateLogin() {
