@@ -27,6 +27,9 @@ public class ApkUser {
     private String role;
     private boolean isEnabled;
 
+    @OneToOne
+    private VerificationToken token;
+
     public ApkUser(String apkUser_successfully_authenticated) {
     }
 
