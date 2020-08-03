@@ -2,6 +2,7 @@ package com.skorupa.simplerestapi.controllers;
 
 import com.skorupa.simplerestapi.model.ApkUser;
 import com.skorupa.simplerestapi.model.Car;
+import com.skorupa.simplerestapi.model.UnverifiedUser;
 import com.skorupa.simplerestapi.model.VerificationToken;
 import com.skorupa.simplerestapi.repository.UserRepository;
 import org.springframework.context.ApplicationEventPublisher;
@@ -28,10 +29,19 @@ public class ApkUserController {
 
     @PostMapping
     public String create(@RequestBody ApkUser apkUser) {
-        VerificationToken token = new VerificationToken();
+
+        ApkUser userToFind = userRepository.findUserByEmail(apkUser.getUsername());
+        ApkUser userNameToFind = userRepository.findUserByUsername(apkUser.getUsername());
+        if (userNameToFind == null && userToFind == null) {
+
+
+            VerificationToken token = new VerificationToken();
 //        apkUser.setToken(token);
-        apkUser.setPassword(passwordEncoder().encode(apkUser.getPassword()));
-        userRepository.save(apkUser);
-        return "User was created successfully";
+            apkUser.setPassword(passwordEncoder().encode(apkUser.getPassword()));
+            userRepository.save(apkUser);
+            return "User was created successfully";
+        } else {
+            return "User in db";
+        }
     }
 }
