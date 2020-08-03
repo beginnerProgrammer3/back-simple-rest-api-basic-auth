@@ -1,8 +1,16 @@
 package com.skorupa.simplerestapi.controllers;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.skorupa.simplerestapi.model.ApkUser;
+import com.skorupa.simplerestapi.model.Car;
+import com.skorupa.simplerestapi.model.VerificationToken;
+import com.skorupa.simplerestapi.repository.UserRepository;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+
+import static com.skorupa.simplerestapi.security.PasswordConfig.passwordEncoder;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -10,4 +18,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApkUserController {
 
 
+    private ApplicationEventPublisher applicationEventPublisher;
+    private UserRepository userRepository;
+
+    public ApkUserController(ApplicationEventPublisher applicationEventPublisher, UserRepository userRepository) {
+        this.applicationEventPublisher = applicationEventPublisher;
+        this.userRepository = userRepository;
+    }
+
+    @PostMapping
+    public String create(@RequestBody ApkUser apkUser) {
+        VerificationToken token = new VerificationToken();
+//        apkUser.setToken(token);
+        apkUser.setPassword(passwordEncoder().encode(apkUser.getPassword()));
+        userRepository.save(apkUser);
+        return "User was created successfully";
+    }
 }

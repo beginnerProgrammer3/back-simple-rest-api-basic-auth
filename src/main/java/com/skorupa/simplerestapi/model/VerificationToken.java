@@ -8,34 +8,38 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class VerificationToken {
 
-    private static final int expitartionTime =60 *12;
+    private static final String notVerified = "PENDING";
+    private static final String verified = "VERIFIED";
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String token;
+    private LocalDate expireDate;
+    private LocalDate issuedDateTime;
+    private String status;
 
-    @OneToOne
-    @JoinColumn(nullable = false, name= "apkuser_id")
-    private ApkUser apkUser;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "unverifiedUser_id")
+    private UnverifiedUser unverifiedUser;
 
-    private Date expireDate;
-
-    private Date calcuateExpireDate(int expireTimeInMin){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Timestamp(calendar.getTime().getTime()));
-        calendar.add(Calendar.MINUTE, expireTimeInMin);
-        return new Date(calendar.getTime().getTime());
+    public VerificationToken() {
+        this.token = UUID.randomUUID().toString();
+        this.issuedDateTime = LocalDate.now();
+        this.expireDate = LocalDate.now().plusDays(1);
+        this.status = notVerified;
     }
+
 }
+

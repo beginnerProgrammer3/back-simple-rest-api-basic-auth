@@ -7,9 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -17,9 +22,8 @@ import java.util.Collection;
 public class ApkUser {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String status;
     @Column(unique = true)
     private String username;
     private String email;
@@ -27,24 +31,31 @@ public class ApkUser {
     private String role;
     private boolean isEnabled;
 
+//    @OneToOne(cascade = CascadeType.ALL, mappedBy = "apkUser")
+//    private VerificationToken token;
+
     @OneToOne
-    private VerificationToken token;
+    private Customer customer;
+
+    @OneToOne
+    private UnverifiedUser unverifiedUser_id;
 
     public ApkUser(String apkUser_successfully_authenticated) {
     }
 
     public ApkUser(){
-
+        this.isEnabled=false;
     }
 
-    public ApkUser(String status, String username,
+    public ApkUser(String username,
                    String email, String password, String role, boolean isEnabled) {
-        this.status = status;
+
         this.username=username;
-        this.password=password;
+        this.password= password;
         this.role=role;
         this.email=email;
         this.isEnabled=isEnabled;
+
     }
 
 }
