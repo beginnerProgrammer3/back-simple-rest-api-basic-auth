@@ -37,8 +37,7 @@ public class ApkUser {
     @OneToOne
     private Customer customer;
 
-    @OneToOne
-    private UnverifiedUser unverifiedUser_id;
+
 
     public ApkUser(String apkUser_successfully_authenticated) {
     }

@@ -1,16 +1,11 @@
 package com.skorupa.simplerestapi.controllers;
 
 import com.skorupa.simplerestapi.model.ApkUser;
-import com.skorupa.simplerestapi.model.Car;
-import com.skorupa.simplerestapi.model.UnverifiedUser;
 import com.skorupa.simplerestapi.model.VerificationToken;
 import com.skorupa.simplerestapi.repository.UserRepository;
 import com.skorupa.simplerestapi.services.MailSenderService;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 import static com.skorupa.simplerestapi.security.PasswordConfig.passwordEncoder;
 
