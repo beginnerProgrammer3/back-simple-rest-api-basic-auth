@@ -5,6 +5,7 @@ import com.skorupa.simplerestapi.model.Car;
 import com.skorupa.simplerestapi.model.UnverifiedUser;
 import com.skorupa.simplerestapi.model.VerificationToken;
 import com.skorupa.simplerestapi.repository.UserRepository;
+import com.skorupa.simplerestapi.services.MailSenderService;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +22,14 @@ public class ApkUserController {
 
     private ApplicationEventPublisher applicationEventPublisher;
     private UserRepository userRepository;
+    private MailSenderService mailSenderService;
 
-    public ApkUserController(ApplicationEventPublisher applicationEventPublisher, UserRepository userRepository) {
+    public ApkUserController(ApplicationEventPublisher applicationEventPublisher,
+                             UserRepository userRepository,
+                             MailSenderService mailSenderService) {
         this.applicationEventPublisher = applicationEventPublisher;
         this.userRepository = userRepository;
+        this.mailSenderService = mailSenderService;
     }
 
     @PostMapping
@@ -39,6 +44,8 @@ public class ApkUserController {
 //        apkUser.setToken(token);
             apkUser.setPassword(passwordEncoder().encode(apkUser.getPassword()));
             userRepository.save(apkUser);
+
+            mailSenderService.prepareAndSendByMail(apkUser.getEmail(),token.getToken());
             return "User was created successfully";
         } else {
             return "User in db";

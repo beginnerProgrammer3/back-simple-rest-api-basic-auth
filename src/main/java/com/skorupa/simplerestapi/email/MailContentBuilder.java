@@ -5,20 +5,21 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-
+@Service
 public class MailContentBuilder {
-    private TemplateEngine template;
 
+    private TemplateEngine templateEngine;
 
-    public MailContentBuilder(TemplateEngine template) {
-        this.template = template;
+    @Autowired
+    public MailContentBuilder(TemplateEngine templateEngine) {
+        this.templateEngine = templateEngine;
     }
 
     public String build(String message){
         Context context =  new Context();
         context.setVariable("message",message);
 
-        return template.process("mailTemplate", context);
+        return templateEngine.process("mailtemplate", context);
     }
 
 }
