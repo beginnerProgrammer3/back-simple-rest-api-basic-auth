@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface VerificationTokenRepository extends CrudRepository<VerificationToken,Long> {
-    List<VerificationToken> findByUnverifiedUserEmail(String email);
-    List<VerificationToken> findByToken(String token);
+    VerificationToken findByToken(String token);
 }

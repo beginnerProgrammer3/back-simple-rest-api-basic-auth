@@ -17,6 +17,8 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class VerificationToken {
 
     private static final String notVerified = "PENDING";
@@ -31,10 +33,11 @@ public class VerificationToken {
     private String status;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "unverifiedUser_id")
-    private UnverifiedUser unverifiedUser;
+    @JoinColumn(name = "user_id")
+    private ApkUser apkUser;
 
-    public VerificationToken() {
+    public VerificationToken(ApkUser apkUser) {
+        this.apkUser = apkUser;
         this.token = UUID.randomUUID().toString();
         this.issuedDateTime = LocalDate.now();
         this.expireDate = LocalDate.now().plusDays(1);

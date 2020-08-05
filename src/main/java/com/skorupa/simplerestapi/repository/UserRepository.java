@@ -10,5 +10,6 @@ public interface UserRepository extends JpaRepository<ApkUser, Long> {
 
     ApkUser findUserByUsername(String username);
     ApkUser findUserByEmail(String email);
+    ApkUser findApkUserById(Long id);
 
 }
