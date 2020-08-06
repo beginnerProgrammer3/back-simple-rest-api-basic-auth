@@ -3,6 +3,7 @@ package com.skorupa.simplerestapi.services;
 
 import com.skorupa.simplerestapi.model.ApkUser;
 import com.skorupa.simplerestapi.repository.UserRepository;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,6 +28,10 @@ public class UserServiceImp implements UserDetailsService {
             throw new UsernameNotFoundException(username);
         }
         UserDetails user = User.withUsername(userApk.getUsername()).password(userApk.getPassword()).authorities("USER").build();
+        if(userApk.isEnabled()==true){
         return user;
+        }else {
+            return null;
+        }
     }
 }
