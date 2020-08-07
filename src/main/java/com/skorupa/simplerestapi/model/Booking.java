@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -21,8 +22,8 @@ public class Booking {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    private Date pickupDate;
-    private Date dropDate;
+    private LocalDate pickupDate;
+    private LocalDate dropDate;
 
     @ManyToOne
     @JoinColumn(name = "bookingCodeStatus")
@@ -31,4 +32,11 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
+
+    public Booking(Customer customer, LocalDate pickupDate,LocalDate dropDate, Car car) {
+        this.customer= customer;
+        this.pickupDate = pickupDate;
+        this.dropDate = dropDate;
+        this.car = car;
+    }
 }

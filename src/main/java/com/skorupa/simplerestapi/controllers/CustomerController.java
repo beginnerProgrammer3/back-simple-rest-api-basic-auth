@@ -1,6 +1,7 @@
 package com.skorupa.simplerestapi.controllers;
 
 import com.skorupa.simplerestapi.model.ApkUser;
+import com.skorupa.simplerestapi.model.Booking;
 import com.skorupa.simplerestapi.model.Car;
 import com.skorupa.simplerestapi.model.Customer;
 import com.skorupa.simplerestapi.repository.CustomerRepository;
@@ -44,4 +45,5 @@ public class CustomerController {
             return customerToUpdate;}
         return null;
     }
+
 }
