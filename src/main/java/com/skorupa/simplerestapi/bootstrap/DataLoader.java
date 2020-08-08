@@ -57,8 +57,6 @@ public class DataLoader implements CommandLineRunner {
 
         ApkUser apkUser1 = new ApkUser("admin","www@wp",passwordEncoder().encode("1234"),"USER",true);
 
-//        apkUser1.setToken(token2);
-//        verificaationTokenRepository.save(token2);
         userRepository.save(apkUser1);
 
 

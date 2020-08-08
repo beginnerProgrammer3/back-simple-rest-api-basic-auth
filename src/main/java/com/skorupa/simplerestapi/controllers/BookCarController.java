@@ -1,10 +1,14 @@
 package com.skorupa.simplerestapi.controllers;
 
 import com.skorupa.simplerestapi.model.Booking;
+import com.skorupa.simplerestapi.model.Customer;
 import com.skorupa.simplerestapi.repository.BookingRepository;
 import com.skorupa.simplerestapi.repository.CarRepository;
 import com.skorupa.simplerestapi.repository.CustomerRepository;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = {"/bookcar"})
@@ -23,9 +27,11 @@ public class BookCarController {
         this.carRepository = carRepository;
     }
 
-    @PutMapping({"/bookcar"})
-    public Booking bookCar(@RequestBody Booking booking){
-
+    @PostMapping(path = {"/booking/{id}"})
+    public Booking bookCar(@RequestBody Booking booking, @PathVariable("id") Long id){
+        Booking bookingToSave = booking;
+        Optional<Customer> customer = customerRepository.findById(id);
+        booking.setCustomer(customer.get());
         return bookingRepository.save(booking);
     }
 }
