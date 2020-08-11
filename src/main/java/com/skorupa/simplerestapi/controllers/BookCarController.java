@@ -28,10 +28,7 @@ public class BookCarController {
     }
 
     @PostMapping(path = {"/booking/{id}"})
-    public Booking bookCar(@RequestBody Booking booking, @PathVariable("id") Long id){
-        Booking bookingToSave = booking;
-        Optional<Customer> customer = customerRepository.findById(id);
-        booking.setCustomer(customer.get());
+    public Booking bookCar(@RequestBody Booking booking){
         return bookingRepository.save(booking);
     }
 }

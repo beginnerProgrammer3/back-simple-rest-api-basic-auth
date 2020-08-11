@@ -25,9 +25,9 @@ public class Booking {
     private LocalDate pickupDate;
     private LocalDate dropDate;
 
-    @ManyToOne
-    @JoinColumn(name = "bookingCodeStatus")
-    private BookingStatusCode bookingStatusCode;
+//    @ManyToOne
+//    @JoinColumn(name = "bookingCodeStatus")
+//    private BookingStatusCode bookingStatusCode;
 
     @ManyToOne
     @JoinColumn(name = "car_id")
