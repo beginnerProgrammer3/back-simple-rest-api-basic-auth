@@ -39,7 +39,7 @@ public class DataLoader implements CommandLineRunner {
         Car car2 = new Car("AUDI","A3","AGN",1800.00,223234L,6000.00,"https://thumbs.img-sprzedajemy.pl/1000x901c/48/81/18/piekne-audi-a3-8l-18t-audi-dukla-519648130.jpg");
         carRepository.save(car1);
         carRepository.save(car2);
-        ApkUser apkUser = new ApkUser("user","www@wp",passwordEncoder().encode("1234"),"USER",false);
+        ApkUser apkUser = new ApkUser("user","www@wp",passwordEncoder().encode("1234"),"USER",true);
         Customer custRandom = new Customer("Jacek", "Skorupa", "ul.Przyjazni 22/44", "Wroclaw",
                 "33-333","332223432","qwqe334d");
         apkUser.setCustomer(custRandom);

@@ -1,5 +1,6 @@
 package com.skorupa.simplerestapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class Customer {
     private String phoneNumber;
     private String driverLicenseNumber;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "customer")
     private Set<Booking> bookingSet;
 

@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 import static com.skorupa.simplerestapi.security.PasswordConfig.passwordEncoder;
@@ -54,13 +55,16 @@ public class ApkUserController {
     public ModelAndView confirmuserAccount(ModelAndView modelAndView, @RequestParam("code") String token){
 
         VerificationToken tokenToFind = verificationTokenRepository.findByToken(token);
+        LocalDate dataNow = LocalDate.now();
 
-        if(tokenToFind == null){
+        if(tokenToFind == null && tokenToFind.getExpireDate().isAfter(dataNow)){
             modelAndView.addObject("msg", "The link is invalid");
             modelAndView.setViewName("error");
         }else{
             ApkUser apkUserToChange = userRepository.findApkUserById(tokenToFind.getApkUser().getId());
             apkUserToChange.setEnabled(true);
+            tokenToFind.setStatus("VERIFIED");
+            verificationTokenRepository.save(tokenToFind);
             userRepository.save(apkUserToChange);
             modelAndView.setViewName("activatedPage");
         }
