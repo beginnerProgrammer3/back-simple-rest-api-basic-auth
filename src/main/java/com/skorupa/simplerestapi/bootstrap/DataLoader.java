@@ -43,7 +43,9 @@ public class DataLoader implements CommandLineRunner {
         Customer custRandom = new Customer("Jacek", "Skorupa", "ul.Przyjazni 22/44", "Wroclaw",
                 "33-333","332223432","qwqe334d");
         apkUser.setCustomer(custRandom);
-        Booking booking = new Booking(custRandom,LocalDate.of(2020,10,12) ,LocalDate.of(2020,11,20), car1);
+//        Booking booking = new Booking(LocalDate.of(2020,11,20), LocalDate.of(2020,11,21), car1, custRandom);
+
+        Booking booking = new Booking("1111", "11111", car1, custRandom);
         Set<Booking> setBooking = new HashSet<>();
         setBooking.add(booking);
         //        apkUser.setToken(token1);

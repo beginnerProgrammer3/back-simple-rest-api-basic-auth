@@ -6,6 +6,8 @@ import com.skorupa.simplerestapi.model.Customer;
 import com.skorupa.simplerestapi.repository.BookingRepository;
 import com.skorupa.simplerestapi.repository.CarRepository;
 import com.skorupa.simplerestapi.repository.CustomerRepository;
+import net.minidev.json.JSONObject;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -29,8 +31,9 @@ public class BookCarController {
         this.carRepository = carRepository;
     }
 
-    @PostMapping
-    public Booking bookCar(@RequestBody Booking booking){
-        return bookingRepository.save(booking);
+    @PostMapping({"/book"})
+    public ResponseEntity<Booking> bookCar(@RequestBody Booking booking){
+        System.out.println(booking);
+        return booking;
     }
 }
