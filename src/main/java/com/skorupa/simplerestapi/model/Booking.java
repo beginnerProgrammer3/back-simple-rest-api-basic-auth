@@ -37,10 +37,10 @@ public class Booking {
     @JsonProperty("Customer")
     private Customer customer;
     @JsonProperty("pickupDate")
-    private String pickupDate;
+    private LocalDate pickupDate;
 
     @JsonProperty("dropDate")
-    private String dropDate;
+    private LocalDate dropDate;
 
 //    private LocalDate pickupDate;
 //    private LocalDate dropDate;
@@ -54,7 +54,7 @@ public class Booking {
     @JsonProperty("Car")
     private Car car;
 
-    public Booking(String pickupDate,String dropDate,  Car car, Customer customer) {
+    public Booking(LocalDate pickupDate,LocalDate dropDate,  Car car, Customer customer) {
         this.customer= customer;
         this.pickupDate = pickupDate;
         this.dropDate = dropDate;
