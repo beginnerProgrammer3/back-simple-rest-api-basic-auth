@@ -10,6 +10,7 @@ import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,8 +33,12 @@ public class BookCarController {
     }
 
     @PostMapping({"/book"})
-    public ResponseEntity<Booking> bookCar(@RequestBody Booking booking){
-        System.out.println(booking);
+    public Booking bookCar(@RequestBody Booking booking){
+        Customer customer = customerRepository.findCustomerById(booking.getCustomer().getId());
+        customer.getBookingSet().add(booking);
+        customerRepository.save(customer);
+        bookingRepository.save(booking);
+        //simple booking soon add date checking and disabling car in main menu
         return booking;
     }
 }

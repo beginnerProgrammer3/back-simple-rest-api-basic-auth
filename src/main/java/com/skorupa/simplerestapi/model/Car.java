@@ -1,6 +1,8 @@
 package com.skorupa.simplerestapi.model;
 
 import ch.qos.logback.core.rolling.helper.TimeBasedArchiveRemover;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,19 +18,36 @@ import javax.persistence.OneToMany;
 @Setter
 @AllArgsConstructor
 @Entity
+@JsonPropertyOrder({
+        "id",
+        "mark",
+        "name",
+        "engine",
+        "capacityEngine",
+        "kilometers",
+        "price",
+        "image"
+})
 public class Car {
 
     @Id
     @GeneratedValue
-    private Long id;
-
-    private String mark;
-    private String name;
-    private String engine;
-    private Double capacityEngine;
-    private Long kilometers;
-    private Double price;
-    private String image;
+    @JsonProperty("id")
+    public Long id;
+    @JsonProperty("mark")
+    public String mark;
+    @JsonProperty("name")
+    public String name;
+    @JsonProperty("engine")
+    public String engine;
+    @JsonProperty("capacityEngine")
+    public Double capacityEngine;
+    @JsonProperty("kilometers")
+    public Long kilometers;
+    @JsonProperty("price")
+    public Double price;
+    @JsonProperty("image")
+    public String image;
 
 
     public Car() {

@@ -1,5 +1,8 @@
 package com.skorupa.simplerestapi.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,15 +17,29 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity(name = "booking")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "id",
+        "firstName",
+        "lastName",
+        "addressLine1",
+        "addressLine2",
+        "postcode",
+        "phoneNumber",
+        "driverLicenseNumber"
+})
 public class Booking {
     @Id
     @GeneratedValue(strategy =GenerationType.AUTO)
     private Long bookingId;
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
+    @JsonProperty("Customer")
     private Customer customer;
-
+    @JsonProperty("pickupDate")
     private String pickupDate;
+
+    @JsonProperty("dropDate")
     private String dropDate;
 
 //    private LocalDate pickupDate;
@@ -34,6 +51,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "car_id")
+    @JsonProperty("Car")
     private Car car;
 
     public Booking(String pickupDate,String dropDate,  Car car, Customer customer) {

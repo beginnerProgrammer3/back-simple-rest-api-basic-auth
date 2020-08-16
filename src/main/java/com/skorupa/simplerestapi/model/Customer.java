@@ -1,12 +1,16 @@
 package com.skorupa.simplerestapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -14,17 +18,38 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity(name = "customer")
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({
+        "id",
+        "firstName",
+        "lastName",
+        "addressLine1",
+        "addressLine2",
+        "postcode",
+        "phoneNumber",
+        "driverLicenseNumber"
+})
 public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @JsonProperty("firstName")
     private String firstName;
+    @JsonProperty("lastName")
     private String lastName;
+    @JsonProperty("addressLine1")
     private String addressLine1;
+    @JsonProperty("addressLine2")
     private String addressLine2;
+
+    @JsonProperty("postcode")
     private String postcode;
+
+    @JsonProperty("phoneNumber")
     private String phoneNumber;
+
+    @JsonProperty("driverLicenseNumber")
     private String driverLicenseNumber;
 
     @JsonIgnore
@@ -42,6 +67,7 @@ public class Customer {
     this.postcode = postcode;
     this.phoneNumber = phoneNumber;
     this.driverLicenseNumber = driverLicenseNumber;
+    this.bookingSet = new HashSet<>();
     }
 
 }
