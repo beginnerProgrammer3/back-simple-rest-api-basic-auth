@@ -5,12 +5,11 @@ import com.skorupa.simplerestapi.model.VerificationToken;
 import com.skorupa.simplerestapi.repository.UserRepository;
 import com.skorupa.simplerestapi.repository.VerificationTokenRepository;
 import com.skorupa.simplerestapi.services.MailSenderService;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
-import java.util.Optional;
+
 
 import static com.skorupa.simplerestapi.security.PasswordConfig.passwordEncoder;
 

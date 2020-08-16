@@ -1,18 +1,15 @@
 package com.skorupa.simplerestapi.controllers;
 
 import com.skorupa.simplerestapi.model.Booking;
-import com.skorupa.simplerestapi.model.Car;
 import com.skorupa.simplerestapi.model.Customer;
 import com.skorupa.simplerestapi.repository.BookingRepository;
 import com.skorupa.simplerestapi.repository.CarRepository;
 import com.skorupa.simplerestapi.repository.CustomerRepository;
-import net.minidev.json.JSONObject;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -41,4 +38,14 @@ public class BookCarController {
         //simple booking soon add date checking and disabling car in main menu
         return booking;
     }
-}
+
+    @GetMapping({"/{id}"})
+    public List<Booking> getAllBookByCustomer(@PathVariable("id") Long id){
+        List<Booking> bookingSet = (List<Booking>) bookingRepository.findAll();
+        List<Booking> bookingList = bookingSet.stream().filter(booking -> booking.getCustomer()
+                .getId().equals(id)).collect(Collectors.toList());
+
+        return bookingList;
+
+        }
+    }
